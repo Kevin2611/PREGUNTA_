@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES VIRUS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6f2;
+            padding: 50px;
+            overflow: hidden;
+        }
+        h1 {
+            color: #ff4081;
+            font-size: 3rem;
+        }
+        
+        button {
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #yes-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #no-btn {
+            background-color: #f44336;
+            color: white;
+            position: relative;
+        }
+        #message {
+            font-size: 2rem;
+            margin-top: 20px;
+            color: #ff4081;
+            font-weight: bold;
+        }
+        #content, #step2-btn, #step3-btn {
+            display: none;
+        }
+        .emoji {
+            position: absolute;
+            font-size: 2rem;
+            animation: floatUp 3s linear infinite;
+        }
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh);
+            }
+        }
+    </style>
+    <script>
+        let noClickCount = 0;
+
+        function showMessage(answer) {
+            let messageDiv = document.getElementById("message");
+
+            if (answer === "yes") {
+              messageDiv.innerHTML = `
+    <div style="font-size: 1.2rem;">
+        YA VES, MAS EL DRAMA CORAZON... PERO BUENO ¿QUIEN TIENE HAMBRE?<br>
+        <a href="https://www.youtube.com/watch?v=DiVJGn9mp20" target="_blank" 
+           style="color:#ff4081; font-size:1rem; display:block; margin-top:10px;">
+
+           🎵 Escúchala: Quiero saber de ti – Cristian Castro
+        </a>
+    </div>`;
+
+            } else {
+                noClickCount++;
+                messageDiv.innerHTML = ""; // Ocultar mensaje anterior
+                if (noClickCount >= 3) {
+                    messageDiv.innerHTML = "TA WENO SE FELIZ :(";
+                }
+                moveNoButton();
+                createEmojis(); // Crear emojis de tristeza
+            }
+        }
+
+        function moveNoButton() {
+            let noBtn = document.getElementById("no-btn");
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 100);
+            noBtn.style.position = "absolute";
+            noBtn.style.left = `${x}px`;
+noBtn.style.top = `${y}px`;
+
+        }
+
+        function createHearts() {
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement("div");
+                heart.innerHTML = "❤️";
+                heart.classList.add("emoji");
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 2 + 2) + "s";
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+            }
+        }
+
+        function createEmojis() {
+            for (let i = 0; i < 20; i++) {
+                let emoji = document.createElement("div");
+                emoji.innerHTML = "🤧";
+                emoji.classList.add("emoji");
+                emoji.style.left = Math.random() * 100 + "vw";
+                emoji.style.animationDuration = (Math.random() * 2 + 2) + "s";
+                document.body.appendChild(emoji);
+
+                setTimeout(() => {
+                    emoji.remove();
+                }, 3000);
+            }
+        }
+
+        function showStep2() {
+            document.getElementById("start-btn").style.display = "none";
+            document.getElementById("step2-btn").style.display = "block";
+        }
+
+        function showStep3() {
+            document.getElementById("step2-btn").style.display = "none";
+            document.getElementById("step3-btn").style.display = "block";
+        }
+
+        function showContent() {
+            document.getElementById("step3-btn").style.display = "none";
+            document.getElementById("content").style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <button id="start-btn" onclick="showStep2()">MAMITA BELLA</button>
+    <button id="step2-btn" onclick="showStep3()">HERMOSA...</button>
+    <button id="step3-btn" onclick="showContent()">BOBITA DEL CEREBRO... ( ͡❛ ᴗ ͡❛)</button>
+    
+    <div id="content">
+        <h1 style="font-size: 7vw;">😭 ¿MEPER DONAS? 💖</h1>
+
+        <div class="button-container">
+            <button id="yes-btn" onclick="showMessage('yes')">Sí</button>
+            <button id="no-btn" onclick="showMessage('no')">No</button>
+        </div>
+        <div id="message"></div>
+    </div>
+</body>
+</html>
